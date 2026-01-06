@@ -1,0 +1,42 @@
+<div class="erp-container">
+  <div class="erp-card erp-card--wide">
+
+    <div class="erp-header">
+      <h2>Purities</h2>
+      <%= link_to "Add Purity", new_purity_path, class: "btn-primary" %>
+    </div>
+
+    <table class="erp-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Metal</th>
+          <th>Purity %</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @purities.each do |p| %>
+          <tr>
+            <td><%= p.name %></td>
+            <td><%= p.metal.name %></td>
+            <td><%= p.purity_percent %>%</td>
+            <td>
+              <% if p.active? %>
+                <span class="erp-status erp-status--active">Active</span>
+              <% else %>
+                <span class="erp-status erp-status--inactive">Inactive</span>
+              <% end %>
+            </td>
+            <td class="table-actions">
+              <%= link_to "Edit", edit_purity_path(p) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

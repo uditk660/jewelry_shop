@@ -1,0 +1,25 @@
+<%= form_for @purity do |f| %>
+
+  <div class="erp-form-group">
+    <%= f.label :name, "Purity Name" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :purity_percent %>
+    <%= f.number_field :purity_percent, step: 0.01 %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :metal_id, "Metal" %>
+    <%= f.collection_select :metal_id, Metal.active, :id, :name %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.check_box :active %>
+    <%= f.label :active %>
+  </div>
+
+  <%= f.submit class: "btn-primary" %>
+
+<% end %>

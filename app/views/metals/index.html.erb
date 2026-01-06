@@ -1,0 +1,40 @@
+<div class="erp-container">
+  <div class="erp-card erp-card--wide">
+
+    <div class="erp-header">
+      <h2>Metals</h2>
+      <%= link_to "Add Metal", new_metal_path, class: "btn-primary" %>
+    </div>
+
+    <table class="erp-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Base Unit</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @metals.each do |metal| %>
+          <tr>
+            <td><%= metal.name %></td>
+            <td><%= metal.base_unit %></td>
+            <td>
+              <% if metal.active? %>
+                <span class="erp-status erp-status--active">Active</span>
+              <% else %>
+                <span class="erp-status erp-status--inactive">Inactive</span>
+              <% end %>
+            </td>
+            <td class="table-actions">
+              <%= link_to "Edit", edit_metal_path(metal) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

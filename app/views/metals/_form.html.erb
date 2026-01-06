@@ -1,0 +1,25 @@
+<%= form_for @metal do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name, "Metal Name" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "Gold / Silver / Platinum" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :base_unit %>
+    <%= f.text_field :base_unit,
+          class: "form-control",
+          placeholder: "gram",
+          readonly: true %>
+  </div>
+
+  <div class="form-group checkbox">
+    <%= f.check_box :active %>
+    <%= f.label :active, "Active" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit class: "btn-primary" %>
+  </div>
+
+<% end %>

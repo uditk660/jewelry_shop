@@ -13,3 +13,181 @@
  *= require_tree .
  *= require_self
  */
+/* ===== ERP NAVBAR ===== */
+
+.erp-navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand */
+.navbar-brand {
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Links */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #374151;
+}
+
+.navbar-links a:hover {
+  color: #2563eb;
+}
+
+/* Auth Section */
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-email {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+/* Buttons */
+.btn-login,
+.btn-logout {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn-login {
+  border: 1px solid #2563eb;
+  color: #2563eb;
+}
+
+.btn-login:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-logout {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-logout:hover {
+  background: #dc2626;
+}
+
+/* ===== LANDING PAGE ===== */
+
+.landing-wrapper {
+  height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+.landing-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  padding: 50px 60px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  max-width: 420px;
+}
+
+.landing-card h1 {
+  font-size: 28px;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 30px;
+}
+
+.landing-actions .btn-primary {
+  background: #2563eb;
+  color: white;
+  padding: 12px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.landing-actions .btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.erp-card {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 30px;
+  margin: 30px auto;
+  width: 70%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* ===== ERP CONTENT AREA ===== */
+
+.erp-container {
+  width: 90%;
+  margin: 30px auto;
+}
+
+/* Page title + action */
+.erp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.erp-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Primary action button (calm, not loud) */
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+

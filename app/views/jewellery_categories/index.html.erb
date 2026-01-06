@@ -1,0 +1,39 @@
+<div class="erp-container">
+  <div class="erp-card erp-card--wide">
+
+    <div class="erp-header">
+      <h2>Jewellery Categories</h2>
+      <%= link_to "Add Category", new_jewellery_category_path, class: "btn-primary" %>
+    </div>
+
+    <table class="erp-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Metal</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jewellery_categories.each do |cat| %>
+          <tr>
+            <td><%= cat.name %></td>
+            <td><%= cat.metal.name %></td>
+            <td>
+              <% if cat.active? %>
+                <span class="erp-status erp-status--active">Active</span>
+              <% else %>
+                <span class="erp-status erp-status--inactive">Inactive</span>
+              <% end %>
+            </td>
+            <td class="table-actions">
+              <%= link_to "Edit", edit_jewellery_category_path(cat) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
