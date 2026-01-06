@@ -10,9 +10,14 @@
     <ul class="navbar-links">
       <% if user_signed_in? %>
         <li><%= link_to "Dashboard", authenticated_root_path %></li>
-        <li><%= link_to "Inventory", "#" %></li>
-        <li><%= link_to "Sales", "#" %></li>
-        <li><%= link_to "Reports", "#" %></li>
+        <ul class="navbar-links">
+          <li><%= link_to "Metals", metals_path %></li>
+          <li><%= link_to "Purities", purities_path %></li>
+          <li><%= link_to "Categories", jewellery_categories_path %></li>
+          <li><%= link_to "Inventory", stock_ledgers_path %></li>
+          <li><%= link_to "Sales", "#" %></li>
+          <li><%= link_to "Reports", "#" %></li>
+        </ul>
       <% end %>
     </ul>
 

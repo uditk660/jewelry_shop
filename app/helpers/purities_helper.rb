@@ -1,0 +1,2 @@
+module PuritiesHelper
+end

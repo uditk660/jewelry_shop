@@ -145,3 +145,49 @@
   background: #1d4ed8;
 }
 
+.erp-card {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 30px;
+  margin: 30px auto;
+  width: 70%;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* ===== ERP CONTENT AREA ===== */
+
+.erp-container {
+  width: 90%;
+  margin: 30px auto;
+}
+
+/* Page title + action */
+.erp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.erp-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* Primary action button (calm, not loud) */
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+

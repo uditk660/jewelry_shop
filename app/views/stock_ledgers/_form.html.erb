@@ -1,0 +1,96 @@
+<%= form_for @stock_ledger do |f| %>
+
+  <div class="erp-form-group">
+    <%= f.label :metal_id, "Metal" %>
+    <%= f.collection_select :metal_id, Metal.active, :id, :name,
+          { prompt: "Select Metal" },
+          class: "form-control", id: "metal_select" %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :purity_id, "Purity" %>
+    <%= f.collection_select :purity_id, [], :id, :name,
+          { prompt: "Select Purity" },
+          class: "form-control", id: "purity_select" %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :jewellery_category_id, "Category" %>
+    <%= f.collection_select :jewellery_category_id, [], :id, :name,
+          { prompt: "Select Category" },
+          class: "form-control", id: "category_select" %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :transaction_type, "Type" %>
+    <%= f.select :transaction_type,
+          StockLedger.transaction_types.keys.map { |k| [k.humanize, k] },
+          {},
+          class: "form-control" %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :weight, "Weight (grams)" %>
+    <%= f.number_field :weight, step: 0.001, class: "form-control" %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :rate, "Rate (per gram)" %>
+    <%= f.number_field :rate, step: 0.01, class: "form-control" %>
+  </div>
+
+  <div class="erp-form-group"> 
+  	<%= f.label :unit, "Available Unit" %> 
+  	<%= f.number_field :unit, class: "form-control" %> 
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :notes %>
+    <%= f.text_area :notes, rows: 2, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Save Stock", class: "btn-primary" %>
+
+<% end %>
+
+<script>
+document.addEventListener("turbolinks:load", function() {
+  const metalSelect = document.getElementById("metal_select");
+  const puritySelect = document.getElementById("purity_select");
+  const categorySelect = document.getElementById("category_select");
+
+  if (!metalSelect) return;
+
+  const puritiesByMetal = <%= raw @purities_by_metal.to_json %>;
+  const categoriesByMetal = <%= raw @categories_by_metal.to_json %>;
+
+  function populateSelect(selectEl, items) {
+    selectEl.innerHTML = '<option value="">Select</option>';
+    items.forEach(i => {
+      const option = document.createElement("option");
+      option.value = i.id;
+      option.text = i.name;
+      selectEl.appendChild(option);
+    });
+  }
+
+  metalSelect.addEventListener("change", function() {
+    const metalId = parseInt(this.value);
+    populateSelect(puritySelect, puritiesByMetal[metalId] || []);
+    populateSelect(categorySelect, categoriesByMetal[metalId] || []);
+  });
+
+  // 🔥 AUTO SELECT FOR EDIT + REDIRECT AFTER CREATE
+  if (metalSelect.value) {
+    metalSelect.dispatchEvent(new Event("change"));
+
+    <% if @stock_ledger.purity_id.present? %>
+      puritySelect.value = "<%= @stock_ledger.purity_id %>";
+    <% end %>
+
+    <% if @stock_ledger.jewellery_category_id.present? %>
+      categorySelect.value = "<%= @stock_ledger.jewellery_category_id %>";
+    <% end %>
+  }
+});
+</script>
