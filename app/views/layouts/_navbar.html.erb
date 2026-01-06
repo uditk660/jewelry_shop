@@ -1,0 +1,38 @@
+<nav class="erp-navbar">
+  <div class="navbar-container">
+    
+    <!-- Logo / Brand -->
+    <div class="navbar-brand">
+      💎 Jewellery ERP
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="navbar-links">
+      <% if user_signed_in? %>
+        <li><%= link_to "Dashboard", authenticated_root_path %></li>
+        <li><%= link_to "Inventory", "#" %></li>
+        <li><%= link_to "Sales", "#" %></li>
+        <li><%= link_to "Reports", "#" %></li>
+      <% end %>
+    </ul>
+
+    <!-- Auth Section -->
+    <div class="navbar-auth">
+      <% if user_signed_in? %>
+        <span class="user-email">
+          <%= current_user.email %>
+        </span>
+
+        <%= link_to "Logout",
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: "btn-logout" %>
+      <% else %>
+        <%= link_to "Login",
+                    new_user_session_path,
+                    class: "btn-login" %>
+      <% end %>
+    </div>
+
+  </div>
+</nav>
