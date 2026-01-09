@@ -1,0 +1,85 @@
+<div class="erp-card">
+
+  <!-- HEADER BAR -->
+  <div class="erp-header">
+    <h2>Sales</h2>
+
+    <div class="erp-actions">
+      <%= link_to "+ New Sale", new_sale_path, class: "btn-primary" %>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="erp-filter-bar sticky-filter">
+    <%= form_tag sales_path, method: :get, class: "erp-filter-form" do %>
+
+      <div class="filter-left">
+        <%= text_field_tag :query, params[:query],
+              placeholder: "Search Invoice / Amount",
+              class: "form-control search-input" %>
+
+        <%= date_field_tag :from, params[:from], class: "form-control" %>
+        <%= date_field_tag :to, params[:to], class: "form-control" %>
+
+        <%= submit_tag "Apply", class: "btn-primary" %>
+        <%= link_to "Reset", sales_path, class: "btn-secondary" %>
+      </div>
+
+      <div class="filter-right">
+        <%= link_to "Today", sales_path(from: Date.today, to: Date.today),
+              class: "btn-quick" %>
+
+        <%= link_to "This Month",
+              sales_path(from: Date.today.beginning_of_month,
+                         to: Date.today.end_of_month),
+              class: "btn-quick" %>
+      </div>
+
+    <% end %>
+  </div>
+  
+  <!-- KPI SUMMARY -->
+  <div class="erp-kpis">
+    <div class="kpi-card">
+      <span>Total Sales</span>
+      <strong>₹ <%= @total_sales_amount %></strong>
+    </div>
+
+    <div class="kpi-card">
+      <span>Total Bills</span>
+      <strong><%= @total_bills %></strong>
+    </div>
+
+    <div class="kpi-card">
+      <span>Avg Bill</span>
+      <strong>
+        ₹ <%= @total_bills > 0 ? (@total_sales_amount / @total_bills).round(2) : 0 %>
+      </strong>
+    </div>
+  </div>
+
+  <!-- SALES TABLE -->
+  <table class="erp-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Invoice</th>
+        <th>Total Amount</th>
+        <th class="text-right">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sales.each do |sale| %>
+        <tr>
+          <td><%= sale.sale_date.strftime("%d %b %Y") %></td>
+          <td>#<%= sale.id %></td>
+          <td>₹ <%= sale.total_amount %></td>
+          <td class="text-right">
+            <%= link_to "View", sale_path(sale), class: "btn-link" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

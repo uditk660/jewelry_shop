@@ -1,0 +1,141 @@
+<%= form_for @sale do |f| %>
+
+  <!-- HEADER -->
+  <div class="erp-card-header">
+    <%= f.label :sale_date, "Sale Date" %>
+    <%= f.date_field :sale_date, class: "form-control small-input" %>
+  </div>
+
+  <hr>
+
+  <h3 class="section-title">Sale Items</h3>
+
+  <%= f.fields_for :sale_items do |si| %>
+    <div class="sale-item-row">
+
+      <!-- ROW 1 : METAL / PURITY / CATEGORY -->
+      <div class="sale-grid primary">
+
+        <div class="field">
+          <%= si.label :metal_id, "Metal" %>
+          <%= si.collection_select :metal_id, @available_metals, :id, :name,
+                { prompt: "Select Metal" },
+                class: "form-control metal-select" %>
+        </div>
+
+        <div class="field">
+          <%= si.label :purity_id, "Purity" %>
+          <%= si.select :purity_id, [],
+                { prompt: "Select Purity" },
+                class: "form-control purity-select", disabled: true %>
+        </div>
+
+        <div class="field">
+          <%= si.label :jewellery_category_id, "Category" %>
+          <%= si.select :jewellery_category_id, [],
+                { prompt: "Select Category" },
+                class: "form-control category-select", disabled: true %>
+        </div>
+
+      </div>
+
+      <!-- ROW 2 : WEIGHT / RATE / MAKING -->
+      <div class="sale-grid secondary">
+
+        <div class="field">
+          <%= si.label :weight, "Weight (g)" %>
+          <%= si.number_field :weight, step: 0.001,
+                class: "form-control text-right" %>
+        </div>
+
+        <div class="field">
+          <%= si.label :rate, "Rate / g" %>
+          <%= si.number_field :rate, step: 0.01,
+                class: "form-control text-right" %>
+        </div>
+
+        <div class="field">
+          <%= si.label :making_type, "Making Type" %>
+          <%= si.select :making_type,
+                [["Percentage (%)", "percentage"], ["Fixed (₹)", "amount"]],
+                {}, class: "form-control" %>
+        </div>
+
+        <div class="field">
+          <%= si.label :making_value, "Making Value" %>
+          <%= si.number_field :making_value, step: 0.01,
+                class: "form-control text-right" %>
+        </div>
+
+      </div>
+
+    </div>
+  <% end %>
+
+  <hr>
+
+  <div class="actions">
+    <%= f.submit "Complete Sale", class: "btn btn-primary btn-lg" %>
+  </div>
+
+<% end %>
+
+
+<script>
+  document.addEventListener("turbolinks:load", function () {
+
+    const puritiesByMetal =
+      <%= raw @purities_by_metal.to_json %>;
+
+    const categoriesByMetalAndPurity =
+      <%= raw @categories_by_metal_and_purity.to_json %>;
+
+    function populateSelect(selectEl, items, placeholder) {
+      selectEl.innerHTML = `<option value="">${placeholder}</option>`;
+
+      if (!items || items.length === 0) {
+        selectEl.disabled = true;
+        return;
+      }
+
+      items.forEach(item => {
+        const option = document.createElement("option");
+        option.value = item.id;
+        option.textContent = item.name;
+        selectEl.appendChild(option);
+      });
+
+      selectEl.disabled = false;
+    }
+
+    document.querySelectorAll(".sale-item-row").forEach(row => {
+
+      const metalSelect    = row.querySelector(".metal-select");
+      const puritySelect   = row.querySelector(".purity-select");
+      const categorySelect = row.querySelector(".category-select");
+
+      metalSelect.addEventListener("change", function () {
+        const metalId = this.value;
+
+        populateSelect(
+          puritySelect,
+          puritiesByMetal[metalId],
+          "Select Purity"
+        );
+
+        populateSelect(categorySelect, [], "Select Category");
+      });
+
+      puritySelect.addEventListener("change", function () {
+        const metalId  = metalSelect.value;
+        const purityId = this.value;
+
+        populateSelect(
+          categorySelect,
+          categoriesByMetalAndPurity?.[metalId]?.[purityId],
+          "Select Category"
+        );
+      });
+    });
+  });
+</script>

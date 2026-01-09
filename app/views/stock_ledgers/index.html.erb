@@ -9,14 +9,15 @@
     <table class="erp-table">
       <thead>
         <tr>
-          <th>Date</th>
+          <th>Modified Date</th>
           <th>Metal</th>
           <th>Purity</th>
           <th>Category</th>
           <th>Type</th>
           <th>Weight (g)</th>
-          <th>Rate</th>
-          <th>Value</th>
+          <th>Rate/gm</th>
+          <%# <th>Making Charge</th> %>
+          <th>Value/U</th>
           <th>Unit</th>
           <th>Notes</th>
           <th></th>
@@ -26,7 +27,7 @@
       <tbody>
         <% @stock_ledgers.each do |ledger| %>
           <tr>
-            <td><%= ledger.created_at.strftime("%d-%m-%Y") %></td>
+            <td><%= ledger.updated_at.strftime("%d-%m-%Y") %></td>
             <td><%= ledger.metal.name %></td>
             <td><%= ledger.purity.name %></td>
             <td><%= ledger.jewellery_category.name %></td>
@@ -36,8 +37,9 @@
               </span>
             </td>
             <td><%= ledger.weight %></td>
-            <td><%= ledger.rate %></td>
-            <td><%= ledger.value %></td>
+            <td><%= ledger.purity.updated_price %></td>
+            <%#<td>%><%#= ledger.rate %><%#</td>%>
+            <td><%= ledger.weight * ledger.purity.updated_price %></td>
             <td><%= ledger.unit %></td>
             <td><%= ledger.notes %></td>
             <td class="table-actions">

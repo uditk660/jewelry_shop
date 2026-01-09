@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20260106191352) do
+ActiveRecord::Schema.define(version: 20260108072207) do
 
   create_table "jewellery_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.integer  "metal_id"
@@ -32,12 +32,43 @@ ActiveRecord::Schema.define(version: 20260106191352) do
 
   create_table "purities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
     t.integer  "metal_id"
-    t.string   "name",                                                  null: false
-    t.decimal  "purity_percent", precision: 5, scale: 2
-    t.boolean  "active",                                 default: true
-    t.datetime "created_at",                                            null: false
-    t.datetime "updated_at",                                            null: false
+    t.string   "name",                                                   null: false
+    t.decimal  "purity_percent", precision: 5,  scale: 2
+    t.boolean  "active",                                  default: true
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.decimal  "updated_price",  precision: 12, scale: 2
+    t.string   "remarks"
     t.index ["metal_id"], name: "index_purities_on_metal_id", using: :btree
+  end
+
+  create_table "sale_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+    t.integer "sale_id"
+    t.integer "metal_id"
+    t.integer "purity_id"
+    t.integer "jewellery_category_id"
+    t.decimal "weight",                precision: 10, scale: 3
+    t.decimal "rate",                  precision: 10, scale: 2
+    t.string  "making_type"
+    t.decimal "making_value",          precision: 10, scale: 2
+    t.decimal "metal_value",           precision: 12, scale: 2
+    t.decimal "making_amount",         precision: 12, scale: 2
+    t.decimal "total_line_amount",     precision: 12, scale: 2
+    t.index ["jewellery_category_id"], name: "index_sale_items_on_jewellery_category_id", using: :btree
+    t.index ["metal_id"], name: "index_sale_items_on_metal_id", using: :btree
+    t.index ["purity_id"], name: "index_sale_items_on_purity_id", using: :btree
+    t.index ["sale_id"], name: "index_sale_items_on_sale_id", using: :btree
+  end
+
+  create_table "sales", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
+    t.integer "user_id"
+    t.date    "sale_date"
+    t.decimal "subtotal",     precision: 12, scale: 2, default: "0.0"
+    t.decimal "making_total", precision: 12, scale: 2, default: "0.0"
+    t.decimal "cgst",         precision: 12, scale: 2, default: "0.0"
+    t.decimal "sgst",         precision: 12, scale: 2, default: "0.0"
+    t.decimal "total_amount", precision: 12, scale: 2, default: "0.0"
+    t.index ["user_id"], name: "index_sales_on_user_id", using: :btree
   end
 
   create_table "stock_ledgers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
@@ -76,6 +107,11 @@ ActiveRecord::Schema.define(version: 20260106191352) do
 
   add_foreign_key "jewellery_categories", "metals"
   add_foreign_key "purities", "metals"
+  add_foreign_key "sale_items", "jewellery_categories"
+  add_foreign_key "sale_items", "metals"
+  add_foreign_key "sale_items", "purities"
+  add_foreign_key "sale_items", "sales"
+  add_foreign_key "sales", "users"
   add_foreign_key "stock_ledgers", "jewellery_categories"
   add_foreign_key "stock_ledgers", "metals"
   add_foreign_key "stock_ledgers", "purities"

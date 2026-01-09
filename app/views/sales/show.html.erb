@@ -1,0 +1,74 @@
+<div class="erp-container">
+
+  <!-- HEADER -->
+  <div class="erp-card sale-header">
+    <div class="sale-header-left">
+      <h2>Invoice #<%= @sale.id %></h2>
+      <span class="sale-date"><%= @sale.sale_date.strftime("%d %b %Y") %></span>
+    </div>
+
+    <div class="sale-header-right">
+      <span class="status-badge paid">PAID</span>
+    </div>
+  </div>
+
+  <!-- ITEMS -->
+  <div class="erp-card">
+    <h3 class="section-title">Jewellery Items</h3>
+
+    <table class="erp-table">
+      <thead>
+        <tr>
+          <th>Metal</th>
+          <th class="text-right">Weight (g)</th>
+          <th class="text-right">Rate</th>
+          <th class="text-right">Making</th>
+          <th class="text-right">Line Total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @sale.sale_items.each do |item| %>
+          <tr>
+            <td><strong><%= item.metal.name %></strong></td>
+            <td class="text-right"><%= item.weight %></td>
+            <td class="text-right">₹ <%= number_with_delimiter(item.rate) %></td>
+            <td class="text-right">₹ <%= number_with_delimiter(item.making_amount) %></td>
+            <td class="text-right total-cell">
+              ₹ <%= number_with_delimiter(item.total_line_amount) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="erp-card sale-summary">
+    <div class="summary-row">
+      <span>Subtotal</span>
+      <span>₹ <%= number_with_delimiter(@sale.subtotal) %></span>
+    </div>
+
+    <div class="summary-row">
+      <span>Making Charges</span>
+      <span>₹ <%= number_with_delimiter(@sale.making_total) %></span>
+    </div>
+
+    <div class="summary-row">
+      <span>CGST (9%)</span>
+      <span>₹ <%= number_with_delimiter(@sale.cgst) %></span>
+    </div>
+
+    <div class="summary-row">
+      <span>SGST (9%)</span>
+      <span>₹ <%= number_with_delimiter(@sale.sgst) %></span>
+    </div>
+
+    <div class="summary-row grand-total">
+      <span>Grand Total</span>
+      <span>₹ <%= number_with_delimiter(@sale.total_amount) %></span>
+    </div>
+  </div>
+
+</div>
