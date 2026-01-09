@@ -12,7 +12,11 @@ class StockLedger < ApplicationRecord
 
   before_save :calculate_value
 
+  # scope :available, -> { where(transaction_type: "in").where("unit > 0").where("weight > 0") }
+  scope :available, -> { where("unit > 0 AND weight > 0") }
+
   def calculate_value
     self.value = (weight * rate).round(2)
   end
+
 end

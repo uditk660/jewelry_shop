@@ -3,11 +3,11 @@ class CreateSales < ActiveRecord::Migration[5.0]
     create_table :sales do |t|
       t.references :user, foreign_key: true
       t.date :sale_date
-      t.decimal :subtotal
-      t.decimal :making_total
-      t.decimal :cgst
-      t.decimal :sgst
-      t.decimal :total_amount
+      t.decimal :subtotal, precision: 12, scale: 2, default: 0
+      t.decimal :making_total, precision: 12, scale: 2, default: 0
+      t.decimal :cgst, precision: 12, scale: 2, default: 0
+      t.decimal :sgst, precision: 12, scale: 2, default: 0
+      t.decimal :total_amount, precision: 12, scale: 2, default: 0
     end
   end
 end

@@ -11,6 +11,16 @@
   </div>
 
   <div class="erp-form-group">
+    <%= f.label :updated_price %>
+    <%= f.number_field :updated_price, step: 0.01 %>
+  </div>
+
+  <div class="erp-form-group">
+    <%= f.label :remarks, "Remarks" %>
+    <%= f.text_field :remarks %>
+  </div>
+
+  <div class="erp-form-group">
     <%= f.label :metal_id, "Metal" %>
     <%= f.collection_select :metal_id, Metal.active, :id, :name %>
   </div>
