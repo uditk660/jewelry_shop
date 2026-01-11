@@ -1,0 +1,28 @@
+<div class="glass-card wide-form">
+  <h2>Companies</h2>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>GST</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= company.name %></td>
+          <td><%= company.phone %></td>
+          <td><%= company.gst %></td>
+          <td>
+            <%= link_to "View", company_path(company) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to "New Company", new_company_path, class: "btn-primary" %>
+</div>

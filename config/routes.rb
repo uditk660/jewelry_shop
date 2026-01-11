@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     resources :jewellery_categories, only: [:index, :new, :create, :edit, :update]
     resources :stock_ledgers
     resources :sales, only: [:index, :new, :create, :show]
+    resources :companies
   end
 end

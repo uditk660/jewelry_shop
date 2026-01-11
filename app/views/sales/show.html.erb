@@ -1,50 +1,121 @@
-<div class="erp-container">
+<div class="invoice-wrapper">
 
-  <!-- HEADER -->
-  <div class="erp-card sale-header">
-    <div class="sale-header-left">
-      <h2>Invoice #<%= @sale.id %></h2>
-      <span class="sale-date"><%= @sale.sale_date.strftime("%d %b %Y") %></span>
+  <!-- ===============================
+       INVOICE HEADER
+  ================================ -->
+  <div class="invoice-top">
+
+    <div class="invoice-company">
+      <div class="company-name">
+        Invoice #<%= @sale.id %>
+      </div>
+      <div class="company-details">
+        <div>Date: <%= @sale.sale_date.strftime("%d %b %Y") %></div>
+      </div>
     </div>
 
-    <div class="sale-header-right">
+    <div class="invoice-meta">
       <span class="status-badge paid">PAID</span>
+    </div>
+
+  </div>
+
+  <hr>
+
+   <!-- ===============================
+       INVOICE TOP INFORMATION
+  ================================ -->
+
+  <div class="invoice-top">
+
+    <!-- COMPANY INFO -->
+    <div class="invoice-company">
+      <div class="company-name">
+        <div class="buyer-title">Shop Info</div>
+        <%= @company.name %>
+      </div>
+
+      <div class="company-details">
+        <div><%= @company.address %></div>
+        <div><%= @company.city %> - <%= @company.pin %></div>
+        <div>Phone: <%= @company.phone %></div>
+        <div>Email: <%= @company.email %></div>
+        <div>GST: <%= @company.gst %></div>
+      </div>
+    </div>
+
+    <!-- INVOICE META -->
+    <div class="invoice-meta">
+      <div><strong>Date:</strong> <%#= @sale.sale_date %></div>
+      <div><strong>Invoice No:</strong> <%#= @sale.invoice_number %></div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- ===============================
+       CUSTOMER / BUYER INFO
+  ================================ -->
+
+  <div class="invoice-buyer">
+    <div class="buyer-title">Buyer</div>
+
+    <div class="buyer-details">
+      <div><strong>Name:</strong> <%= @customer.name %></div>
+      <div><strong>Address:</strong> <%= @customer.address %></div>
+      <div><strong>City:</strong> <%= @customer.city %></div>
+      <div><strong>Phone:</strong> <%= @customer.phone %></div>
     </div>
   </div>
 
-  <!-- ITEMS -->
-  <div class="erp-card">
-    <h3 class="section-title">Jewellery Items</h3>
+  <hr>
+  <%# ========================================= %>
 
-    <table class="erp-table">
+  <!-- ===============================
+       ITEMS TABLE
+  ================================ -->
+  <div class="invoice-items">
+
+    <div class="section-title">Jewellery Items</div>
+
+    <table class="invoice-table">
       <thead>
         <tr>
-          <th>Metal</th>
+          <th>Description</th>
           <th class="text-right">Weight (g)</th>
           <th class="text-right">Rate</th>
           <th class="text-right">Making</th>
-          <th class="text-right">Line Total</th>
+          <th class="text-right">Amount</th>
         </tr>
       </thead>
 
       <tbody>
         <% @sale.sale_items.each do |item| %>
           <tr>
-            <td><strong><%= item.metal.name %></strong></td>
+            <td>
+              <strong><%= item.metal.name %></strong>
+            </td>
             <td class="text-right"><%= item.weight %></td>
             <td class="text-right">₹ <%= number_with_delimiter(item.rate) %></td>
             <td class="text-right">₹ <%= number_with_delimiter(item.making_amount) %></td>
-            <td class="text-right total-cell">
+            <td class="text-right amount-cell">
               ₹ <%= number_with_delimiter(item.total_line_amount) %>
             </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
   </div>
 
-  <!-- SUMMARY -->
-  <div class="erp-card sale-summary">
+  <hr>
+
+  <!-- ===============================
+       TOTALS (RIGHT SIDE)
+  ================================ -->
+  <div class="invoice-summary">
+
     <div class="summary-row">
       <span>Subtotal</span>
       <span>₹ <%= number_with_delimiter(@sale.subtotal) %></span>
@@ -66,9 +137,10 @@
     </div>
 
     <div class="summary-row grand-total">
-      <span>Grand Total</span>
+      <span>Total</span>
       <span>₹ <%= number_with_delimiter(@sale.total_amount) %></span>
     </div>
+
   </div>
 
 </div>

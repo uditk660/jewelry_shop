@@ -1,0 +1,18 @@
+<div class="glass-card wide-form">
+  <h2><%= @company.name %></h2>
+
+  <% if @company.logo.exists? %>
+    <%= image_tag @company.logo.url(:medium) %>
+  <% end %>
+
+  <p><strong>Address:</strong> <%= @company.address %></p>
+  <p><strong>City:</strong> <%= @company.city %></p>
+  <p><strong>PIN:</strong> <%= @company.pin %></p>
+  <p><strong>Phone:</strong> <%= @company.phone %></p>
+  <p><strong>Email:</strong> <%= @company.email %></p>
+  <p><strong>GST:</strong> <%= @company.gst %></p>
+  <p><strong>PAN:</strong> <%= @company.pan %></p>
+  <p><strong>Adhaar:</strong> <%= @company.adhaar %></p>
+
+  <%= link_to "Edit", edit_company_path(@company), class: "btn-secondary" %>
+</div>

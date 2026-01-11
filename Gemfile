@@ -35,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'
+gem "paperclip", "~> 6.0.0"
+gem 'cocaine', '~> 0.5.8'
 
 group :development, :test do
   gem 'pry'

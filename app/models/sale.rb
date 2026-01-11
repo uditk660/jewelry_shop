@@ -8,6 +8,8 @@ class Sale < ApplicationRecord
 
   before_save :calculate_totals
 
+  private
+
   def calculate_totals
     self.subtotal = sale_items.sum(&:metal_value)
     self.making_total = sale_items.sum(&:making_amount)
@@ -18,4 +20,5 @@ class Sale < ApplicationRecord
     self.sgst = (taxable_amount * 0.09).round(2)
     self.total_amount = taxable_amount + cgst + sgst
   end
+
 end

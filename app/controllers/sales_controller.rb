@@ -15,6 +15,7 @@ class SalesController < ApplicationController
 
     @total_sales_amount = @sales.sum(:total_amount)
     @total_bills = @sales.count
+    @company = Company.first
   end
 
   ############### NEW ###############
@@ -65,6 +66,8 @@ class SalesController < ApplicationController
     @categories_by_metal_and_purity.each do |_, purity_hash|
       purity_hash.each_value(&:uniq!)
     end
+    @company = Company.first
+    @customer = Customer.first
   end
 
 
@@ -80,7 +83,7 @@ class SalesController < ApplicationController
       load_sale_form_data
       render :new and return
     end
-    
+
     item.weight = stock.weight
     price = stock.weight * stock.purity.updated_price.to_d 
 
@@ -93,7 +96,8 @@ class SalesController < ApplicationController
                   price + making_value
                 end
     if @sale.save
-      stock.update!( unit: stock.unit - 1 )
+      new_unit   = stock.unit - 1
+      stock.update!(unit: new_unit, transaction_type: (new_unit <= 0 ) ? "out_stock" : stock.transaction_type)
       redirect_to @sale, notice: "Sale completed successfully."
     else
       render :new
@@ -101,6 +105,8 @@ class SalesController < ApplicationController
   end
 
   def show
+    @company = Company.first
+    @customer = Customer.first
   end
 
   private

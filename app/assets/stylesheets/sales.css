@@ -303,3 +303,445 @@
   text-align: right;
 }
 
+
+/*===================================================================================*/
+
+/* =====================================================
+   BASE RESET (ERP SAFE)
+===================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f2f2f2;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #111;
+}
+
+/* =====================================================
+   MAIN INVOICE CONTAINER
+===================================================== */
+form {
+  max-width: 1050px;
+  margin: 30px auto;
+  background: #fff;
+  border: 2px solid #111;
+  padding: 0;
+}
+
+/* =====================================================
+   HEADER (MATCH IMAGE)
+===================================================== */
+.erp-card-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  padding: 18px 20px;
+  background: linear-gradient(
+    to right,
+    #e67e22 0%,
+    #e67e22 75%,
+    #111 75%,
+    #111 100%
+  );
+  color: #fff;
+}
+
+.erp-card-header label {
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.erp-card-header input {
+  margin-top: 6px;
+  height: 34px;
+  border: none;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+/* =====================================================
+   SECTION TITLE (INVOICE STYLE)
+===================================================== */
+.section-title {
+  margin: 0;
+  padding: 12px 16px;
+  background: #f4f4f4;
+  border-top: 2px solid #111;
+  border-bottom: 2px solid #111;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   SALE ITEM BLOCK
+===================================================== */
+.sale-item-row {
+  border-bottom: 2px solid #111;
+  padding: 0;
+}
+
+/* =====================================================
+   GRID ROWS (MATCH TABLE FEEL)
+===================================================== */
+.sale-grid {
+  display: grid;
+  border-top: 1px solid #111;
+}
+
+.sale-grid.primary {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.sale-grid.secondary {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+/* =====================================================
+   FIELDS AS TABLE CELLS
+===================================================== */
+.sale-grid .field {
+  border-right: 1px solid #111;
+  padding: 8px 10px;
+}
+
+.sale-grid .field:last-child {
+  border-right: none;
+}
+
+.field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  height: 32px;
+  border: 1px solid #aaa;
+  padding: 4px 6px;
+  font-size: 13px;
+}
+
+/* =====================================================
+   NUMERIC ALIGNMENT
+===================================================== */
+.text-right {
+  text-align: right;
+}
+
+/* =====================================================
+   HR AS INVOICE LINE
+===================================================== */
+hr {
+  border: none;
+  border-top: 2px solid #111;
+  margin: 0;
+}
+
+/* =====================================================
+   ACTIONS (BOTTOM RIGHT)
+===================================================== */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  background: #f9f9f9;
+}
+
+.btn-primary {
+  background: #e67e22;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 26px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #cf711f;
+}
+
+/* =====================================================
+   PRINT FRIENDLY (FUTURE)
+===================================================== */
+@media print {
+  body {
+    background: #fff;
+  }
+
+  form {
+    margin: 0;
+    border: 2px solid #000;
+  }
+
+  .btn-primary {
+    display: none;
+  }
+}
+
+/*==============================================================================================*/
+
+/* =====================================================
+   INVOICE TOP SECTION
+===================================================== */
+.invoice-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 16px 20px;
+  gap: 10px;
+}
+
+/* =====================================================
+   COMPANY INFO
+===================================================== */
+.invoice-company {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.company-name {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.company-details div {
+  font-size: 13px;
+}
+
+/* =====================================================
+   INVOICE META (RIGHT SIDE)
+===================================================== */
+.invoice-meta {
+  text-align: right;
+  font-size: 13px;
+}
+
+.invoice-meta div {
+  margin-bottom: 4px;
+}
+
+/* =====================================================
+   BUYER SECTION
+===================================================== */
+.invoice-buyer {
+  padding: 12px 20px;
+}
+
+.buyer-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.buyer-details {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =====================================================
+   STRONG HR (INVOICE LINE)
+===================================================== */
+hr {
+  border: none;
+  border-top: 2px solid #111;
+  margin: 0;
+}
+
+/*=================================================Show.html===============================================================*/
+/* =====================================================
+   INVOICE WRAPPER
+===================================================== */
+.invoice-wrapper {
+  max-width: 1050px;
+  margin: 30px auto;
+  background: #fff;
+  border: 2px solid #111;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-table th {
+  background: #f4f4f4;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 1px solid #111;
+  padding: 8px;
+}
+
+.invoice-table td {
+  border: 1px solid #111;
+  padding: 8px;
+  font-size: 13px;
+}
+
+/* =====================================================
+   AMOUNT COLUMN
+===================================================== */
+.amount-cell {
+  font-weight: 700;
+}
+
+/* =====================================================
+   SUMMARY (RIGHT ALIGNED BLOCK)
+===================================================== */
+.invoice-summary {
+  width: 40%;
+  margin-left: auto;
+  padding: 14px 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 4px 0;
+}
+
+.summary-row.grand-total {
+  font-size: 15px;
+  font-weight: 800;
+  border-top: 2px solid #111;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+/* =====================================================
+   STATUS BADGE
+===================================================== */
+.status-badge {
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status-badge.paid {
+  background: #27ae60;
+  color: #fff;
+}
+
+/*===================================================Index.html.erb================================================================*/
+
+/* =====================================================
+   FILTER BAR
+===================================================== */
+.invoice-filter {
+  padding: 14px 20px;
+  background: #f9f9f9;
+}
+
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-left,
+.filter-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.filter-input {
+  height: 34px;
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #aaa;
+}
+
+/* =====================================================
+   QUICK BUTTONS
+===================================================== */
+.btn-quick {
+  background: #e5e7eb;
+  border: 1px solid #bbb;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #111;
+}
+
+.btn-quick:hover {
+  background: #d1d5db;
+}
+
+/* =====================================================
+   KPI SUMMARY
+===================================================== */
+.invoice-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 14px 20px;
+}
+
+.kpi-box {
+  border: 1px solid #111;
+  padding: 12px;
+  text-align: center;
+}
+
+.kpi-box span {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.kpi-box strong {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* =====================================================
+   SMALL BUTTONS
+===================================================== */
+.btn-primary.small,
+.btn-secondary.small {
+  padding: 6px 14px;
+  font-size: 12px;
+}
+
+/* =====================================================
+   LINK BUTTON
+===================================================== */
+.btn-link {
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* =====================================================
+   ACTIONS RIGHT
+===================================================== */
+.actions-right {
+  display: flex;
+  gap: 10px;
+}
