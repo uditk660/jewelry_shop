@@ -8,6 +8,54 @@
 
   <hr>
 
+  <!-- ===============================
+       INVOICE TOP INFORMATION
+  ================================ -->
+
+  <div class="invoice-top">
+
+    <!-- COMPANY INFO -->
+    <div class="invoice-company">
+      <div class="company-name">
+        <%= @company.name %>
+      </div>
+
+      <div class="company-details">
+        <div><%= @company.address %></div>
+        <div><%= @company.city %> - <%= @company.pin %></div>
+        <div>Phone: <%= @company.phone %></div>
+        <div>Email: <%= @company.email %></div>
+        <div>GST: <%= @company.gst %></div>
+      </div>
+    </div>
+
+    <!-- INVOICE META -->
+    <div class="invoice-meta">
+      <div><strong>Date:</strong> <%#= @sale.sale_date %></div>
+      <div><strong>Invoice No:</strong> <%#= @sale.invoice_number %></div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- ===============================
+       CUSTOMER / BUYER INFO
+  ================================ -->
+
+  <div class="invoice-buyer">
+    <div class="buyer-title">Buyer</div>
+
+    <div class="buyer-details">
+      <div><strong>Name:</strong> <%= @customer.name %></div>
+      <div><strong>Address:</strong> <%= @customer.address %></div>
+      <div><strong>City:</strong> <%= @customer.city %></div>
+      <div><strong>Phone:</strong> <%= @customer.phone %></div>
+    </div>
+  </div>
+
+  <hr>
+<%# ========================================= %>
   <h3 class="section-title">Sale Items</h3>
 
   <%= f.fields_for :sale_items do |si| %>

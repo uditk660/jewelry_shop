@@ -1,32 +1,48 @@
-<div class="erp-card">
+<div class="invoice-wrapper">
 
-  <!-- HEADER BAR -->
-  <div class="erp-header">
-    <h2>Sales</h2>
+  <!-- ===============================
+       PAGE HEADER
+  ================================ -->
+  <div class="invoice-top">
 
-    <div class="erp-actions">
-      <%= link_to "+ New Sale", new_sale_path, class: "btn-primary" %>
+    <div class="invoice-company">
+      <div class="company-name">Sales Register</div>
+      <div class="company-details">
+        All jewellery sales invoices
+      </div>
     </div>
+
+    <div class="invoice-meta actions-right">
+      <%= link_to "Sale With Existing", new_sale_path, class: "btn-primary" %>
+      <%= link_to "New Sale", new_sale_path, class: "btn-primary" %>
+    </div>
+
   </div>
 
-  <!-- FILTER BAR -->
-  <div class="erp-filter-bar sticky-filter">
-    <%= form_tag sales_path, method: :get, class: "erp-filter-form" do %>
+  <hr>
+
+  <!-- ===============================
+       FILTER BAR
+  ================================ -->
+  <div class="invoice-filter">
+
+    <%= form_tag sales_path, method: :get, class: "filter-form" do %>
 
       <div class="filter-left">
         <%= text_field_tag :query, params[:query],
               placeholder: "Search Invoice / Amount",
-              class: "form-control search-input" %>
+              class: "filter-input" %>
 
-        <%= date_field_tag :from, params[:from], class: "form-control" %>
-        <%= date_field_tag :to, params[:to], class: "form-control" %>
+        <%= date_field_tag :from, params[:from], class: "filter-input" %>
+        <%= date_field_tag :to, params[:to], class: "filter-input" %>
 
-        <%= submit_tag "Apply", class: "btn-primary" %>
-        <%= link_to "Reset", sales_path, class: "btn-secondary" %>
+        <%= submit_tag "Apply", class: "btn-primary small" %>
+        <%= link_to "Reset", sales_path, class: "btn-secondary small" %>
       </div>
 
       <div class="filter-right">
-        <%= link_to "Today", sales_path(from: Date.today, to: Date.today),
+        <%= link_to "Today",
+              sales_path(from: Date.today, to: Date.today),
               class: "btn-quick" %>
 
         <%= link_to "This Month",
@@ -36,50 +52,64 @@
       </div>
 
     <% end %>
+
   </div>
-  
-  <!-- KPI SUMMARY -->
-  <div class="erp-kpis">
-    <div class="kpi-card">
+
+  <hr>
+
+  <!-- ===============================
+       KPI SUMMARY
+  ================================ -->
+  <div class="invoice-kpis">
+
+    <div class="kpi-box">
       <span>Total Sales</span>
-      <strong>₹ <%= @total_sales_amount %></strong>
+      <strong>₹ <%= number_with_delimiter(@total_sales_amount) %></strong>
     </div>
 
-    <div class="kpi-card">
+    <div class="kpi-box">
       <span>Total Bills</span>
       <strong><%= @total_bills %></strong>
     </div>
 
-    <div class="kpi-card">
-      <span>Avg Bill</span>
+    <div class="kpi-box">
+      <span>Average Bill</span>
       <strong>
         ₹ <%= @total_bills > 0 ? (@total_sales_amount / @total_bills).round(2) : 0 %>
       </strong>
     </div>
+
   </div>
 
-  <!-- SALES TABLE -->
-  <table class="erp-table">
+  <hr>
+
+  <!-- ===============================
+       SALES TABLE
+  ================================ -->
+  <table class="invoice-table">
+
     <thead>
       <tr>
         <th>Date</th>
         <th>Invoice</th>
-        <th>Total Amount</th>
+        <th class="text-right">Total Amount</th>
         <th class="text-right">Action</th>
       </tr>
     </thead>
+
     <tbody>
       <% @sales.each do |sale| %>
         <tr>
           <td><%= sale.sale_date.strftime("%d %b %Y") %></td>
           <td>#<%= sale.id %></td>
-          <td>₹ <%= sale.total_amount %></td>
+          <td class="text-right">₹ <%= number_with_delimiter(sale.total_amount) %></td>
           <td class="text-right">
             <%= link_to "View", sale_path(sale), class: "btn-link" %>
           </td>
         </tr>
       <% end %>
     </tbody>
+
   </table>
 
 </div>

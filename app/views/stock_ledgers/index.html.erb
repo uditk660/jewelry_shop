@@ -18,7 +18,7 @@
           <th>Rate/gm</th>
           <%# <th>Making Charge</th> %>
           <th>Value/U</th>
-          <th>Unit</th>
+          <th>Avl Qty</th>
           <th>Notes</th>
           <th></th>
         </tr>
@@ -39,7 +39,7 @@
             <td><%= ledger.weight %></td>
             <td><%= ledger.purity.updated_price %></td>
             <%#<td>%><%#= ledger.rate %><%#</td>%>
-            <td><%= ledger.weight * ledger.purity.updated_price %></td>
+            <td><%= ledger.weight * ledger.purity.updated_price * ledger.unit %></td>
             <td><%= ledger.unit %></td>
             <td><%= ledger.notes %></td>
             <td class="table-actions">
